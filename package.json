@@ -1,14 +1,14 @@
 {
-  "name": "gulp-skeleton-app",
+  "name": "brewmanager",
   "version": "0.1.0",
-  "description": "Starter Code for gulp enabled app",
+  "description": "Brewmanager app",
   "authors": [
     "Mike Starr"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mstarrrsui/gulp-skeleton.git"
+    "url": "https://github.com/mstarrrsui/brewmanager.git"
   },
   "scripts": {
     "init": "npm install",

@@ -1,12 +1,12 @@
 {
-  "name": "gulp-skeleton",
+  "name": "brewmanager",
   "version": "0.1.0",
-  "description": "Skeleton project with gulp tasks",
+  "description": "Brewmanager app",
   "authors": [
     "Mike Starr"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/mstarrrsui/gulp-skeleton.git",
+  "homepage": "https://github.com/mstarrrsui/brewmanager.git",
   "ignore": [
     "**/.*",
     "node_modules",
