@@ -1,0 +1,31 @@
+{
+  "name": "gulp-skeleton",
+  "version": "0.1.0",
+  "description": "Skeleton project with gulp tasks",
+  "authors": [
+    "Mike Starr"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/mstarrrsui/gulp-skeleton.git",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "less/bootstrap.less"
+      ]
+    }
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.3",
+    "lodash": "^4.11.1"
+  }
+}
