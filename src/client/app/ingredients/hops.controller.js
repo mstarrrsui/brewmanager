@@ -1,7 +1,12 @@
+(function() {
+    'use strict';
 
-'use strict';
+    angular
+        .module('app.ingredients')
+        .controller('HopsController', HopsController);
 
-brewApp.controller('HopsController',
+    HopsController.$inject = ['$http'];
+    /* @ngInject */
     function HopsController($http) {
         var vm = this;
         vm.hops = [];
@@ -36,5 +41,5 @@ brewApp.controller('HopsController',
             }
         }
     }
-);
+})();
 
