@@ -7,6 +7,8 @@ module.exports = function(app) {
     app.get(api + '/customers', getCustomers);
     app.get(api + '/beerstyle/:id', getBeerStyle);
     app.get(api + '/beerstyles', getBeerStyles);
+    app.get(api + '/hops/:id', getHop);
+    app.get(api + '/hops', getHops);
 
     function getCustomer(req, res, next) {
         var json = jsonfileservice.getJsonFromFile(data + 'customers.json');
@@ -28,6 +30,19 @@ module.exports = function(app) {
 
     function getBeerStyle(req, res, next) {
         var json = jsonfileservice.getJsonFromFile(data + 'beerstyles.json');
+        var style = json.data.filter(function(c) {
+            return c.id === parseInt(req.params.id);
+        });
+        res.send(style[0]);
+    }
+
+    function getHops(req, res, next) {
+        var json = jsonfileservice.getJsonFromFile(data + 'hops.json');
+        res.send(json.data);
+    }
+
+    function getHop(req, res, next) {
+        var json = jsonfileservice.getJsonFromFile(data + 'hops.json');
         var style = json.data.filter(function(c) {
             return c.id === parseInt(req.params.id);
         });
