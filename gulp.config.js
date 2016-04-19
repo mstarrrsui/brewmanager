@@ -20,7 +20,7 @@ module.exports = function () {
         ],
         build: './build/',
         client: client,
-        theme: clientStyle + 'bootstrap-theme.css',
+        theme: clientStyle + 'bootstrap-flatly.css',
         css: temp + 'styles.css',
         fonts: './bower_components/font-awesome/fonts/**/*.*',
         html: clientApp + '**/*.html',

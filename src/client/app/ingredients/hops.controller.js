@@ -5,9 +5,9 @@
         .module('app.ingredients')
         .controller('HopsController', HopsController);
 
-    HopsController.$inject = ['$http'];
+    HopsController.$inject = ['$http', 'dataservice', 'logger'];
     /* @ngInject */
-    function HopsController($http) {
+    function HopsController($http, dataservice, logger) {
         var vm = this;
         vm.hops = [];
         //vm.gotoCustomer = gotoCustomer;
@@ -17,29 +17,18 @@
 
         function activate() {
             return getHops().then(function() {
-                //logger.info('Activated Hops View');
+                logger.info('Activated Hops View');
             });
         }
 
         function getHops() {
-            return getHopsData().then(function(data) {
+            return dataservice.getHops().then(function(data) {
                 vm.hops = data;
                 return vm.hops;
             });
         }
 
-        function getHopsData() {
-            return $http.get('/api/hops')
-                .then(getHopsComplete)
-                .catch(function(message) {
-                    //exception.catcher('XHR Failed for getCustomers')(message);
-                    //$location.url('/');
-                });
-
-            function getHopsComplete(data, status, headers, config) {
-                return data.data;
-            }
-        }
+        
     }
 })();
 

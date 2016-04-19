@@ -11,7 +11,6 @@
         var readyPromise;
 
         var service = {
-            //getCustomer: getCustomer,
             getHops: getHops,
             ready: ready
         };
@@ -22,7 +21,7 @@
             return $http.get('/api/hops')
                 .then(getHopsComplete)
                 .catch(function(message) {
-                    exception.catcher('XHR Failed for getCustomers')(message);
+                    exception.catcher('XHR Failed for getHops')(message);
                     $location.url('/');
                 });
 
