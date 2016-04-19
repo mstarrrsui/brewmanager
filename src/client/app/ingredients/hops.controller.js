@@ -10,8 +10,8 @@
     function HopsController($http, dataservice, logger) {
         var vm = this;
         vm.hops = [];
-        //vm.gotoCustomer = gotoCustomer;
         vm.title = 'Hops';
+        vm.clickMe = clickMe;
 
         activate();
 
@@ -28,7 +28,9 @@
             });
         }
 
-        
+        function clickMe(hopsName) {
+            logger.info('Clicked on ' + hopsName + '!!!');
+        }
     }
 })();
 

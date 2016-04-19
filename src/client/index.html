@@ -152,7 +152,7 @@
                         <tbody>
                         <tr ng-repeat="h in vm.hops">
                             <td class="vert-align"><span class="glyphicon glyphicon-trash text-successs"></span></td>
-                            <td class="vert-align col-md-2"><strong>{{h.name}}</strong></td>
+                            <td class="vert-align col-md-2"><strong><span ng-click="vm.clickMe(h.name)">{{h.name}}</span></strong></td>
                             <td class="vert-align col-md-2">{{h.countryOfOrigin}}</td>
                             <td class="vert-align">{{h.alphaAcidMin}}</td>
                             <td class="vert-align">{{h.description}}</td>
