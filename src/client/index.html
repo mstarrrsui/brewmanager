@@ -15,14 +15,35 @@
 
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.css" />
     <!-- endbower -->
 
 
 
     <!-- inject:css -->
+
     <link rel="stylesheet" href="/src/client/styles/bootstrap-theme.css">
+
     <!-- endinject -->
 
+
+
+    <!-- Unify css -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/style.css">-->
+
+    <!-- CSS Header and Footer -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/headers/header-default.css">
+    <link rel="stylesheet" href="/src/client/styles/unify/footers/footer-v1.css">-->
+
+
+
+    <!-- CSS Theme -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/theme-colors/aqua.css" id="style_color">
+    <link rel="stylesheet" href="/src/client/styles/unify/theme-skins/dark.css">-->
+
+    <!-- CSS Customization -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/custom.css">-->
 
     <!-- Inline CSS -->
     <style>
@@ -35,8 +56,14 @@
             background-size: cover;
         }
 
+        .table tbody>tr>td.vert-align{
+            vertical-align: middle;
+        }
+
         body {
         padding-top: 70px;
+            margin-left: 15px;
+            margin-right: 15px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
     </style>
@@ -83,7 +110,7 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
                     <li>
                         <button type="button" class="btn btn-link navbar-btn">
                             <span class="glyphicon glyphicon-log-in"></span> Log In
@@ -99,27 +126,35 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container-fluid pull-left" ng-controller="HopsController as vm">
+    <div class="container content" ng-controller="HopsController as vm">
+
+
         <div class="row">
-            <div>
-                <div title="{{vm.title}}"></div>
-                <h2>{{vm.title}}</h2>
+            <div class="panel panel-blue margin-bottom-40">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i> {{vm.title}}</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                </div>
                 <div>
                     <table class="table table-condensed table-hover table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th class="col-md-2">Hops</th>
-                            <th>Country of Origin</th>
-                            <th>Alpha</th>
-                            <th>Description</th>
+                            <th class="bg-info"></th>
+                            <th class="col-md-2 bg-info">Hops</th>
+                            <th class="bg-info">Country of Origin</th>
+                            <th class="bg-info">Alpha</th>
+                            <th class="bg-info">Description</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="h in vm.hops">
-                            <td class="col-md-2"><strong>{{h.name}}</strong></td>
-                            <td class="col-md-2">{{h.countryOfOrigin}}</td>
-                            <td>{{h.alphaAcidMin}}</td>
-                            <td>{{h.description}}</td>
+                            <td class="vert-align"><span class="glyphicon glyphicon-trash text-successs"></span></td>
+                            <td class="vert-align col-md-2"><strong>{{h.name}}</strong></td>
+                            <td class="vert-align col-md-2">{{h.countryOfOrigin}}</td>
+                            <td class="vert-align">{{h.alphaAcidMin}}</td>
+                            <td class="vert-align">{{h.description}}</td>
                         </tr>
                         </tbody>
                     </table>

@@ -13,19 +13,21 @@
     "bower_components"
   ],
   "overrides": {
-    "bootstrap": {
-      "main": [
-        "dist/js/bootstrap.js",
-        "dist/css/bootstrap.css",
-        "less/bootstrap.less"
-      ]
-    }
+      "bootstrap": {
+        "main": [
+          "dist/js/bootstrap.js",
+          "dist/css/bootstrap.css",
+          "less/bootstrap.less"
+        ]
+      }
   },
   "devDependencies": {},
   "dependencies": {
     "jquery": "^2.2.3",
     "bootstrap": "^3.3.6",
     "angular": "^1.5.3",
-    "lodash": "^4.11.1"
+    "lodash": "^4.11.1",
+    "font-awesome": "~4.2.0",
+    "animate.css": "~3.5.1"
   }
 }
