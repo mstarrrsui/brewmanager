@@ -1587,8 +1587,8 @@ pre code {
     overflow-y: scroll;
 }
 .container {
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 10px;
+    margin-left: 10px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -1608,8 +1608,8 @@ pre code {
     }
 }
 .container-fluid {
-    margin-right: auto;
-    margin-left: auto;
+    margin-right: 20px;
+    margin-left: 20px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -3642,11 +3642,11 @@ tbody.collapse.in {
 @media (min-width: 768px) {
     .navbar-right .dropdown-menu {
         left: auto;
-        right: 0;
+        right: 10px;
     }
     .navbar-right .dropdown-menu-left {
         left: 0;
-        right: auto;
+        right: 10px;
     }
 }
 .btn-group,
@@ -4493,10 +4493,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     }
     .navbar-right {
         float: right !important;
-        margin-right: -15px;
+        margin-right: 10px;
     }
     .navbar-right ~ .navbar-right {
-        margin-right: 0;
+        margin-right: 10px;
     }
 }
 .navbar-default {

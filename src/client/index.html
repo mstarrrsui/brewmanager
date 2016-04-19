@@ -28,7 +28,7 @@
     <style>
 
         .mypage {
-            background: url(img/craft-beer-faint.jpg) no-repeat center center fixed;
+            <!-- background: url(img/craft-beer-faint.jpg) no-repeat center center fixed; -->
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -47,7 +47,7 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container" style="margin-left: 10px">
+        <div style="margin-left: 10px">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -83,9 +83,14 @@
                         </ul>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-link navbar-btn navbar-right">
-                    <span class="glyphicon glyphicon-log-in"></span> Log In
-                </button>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="button" class="btn btn-link navbar-btn">
+                            <span class="glyphicon glyphicon-log-in"></span> Log In
+                        </button>
+                    </li>
+                </ul>
+
                 <!--<a class="btn btn-default navbar-btn navbar-right glyphicon-log-in"></a>-->
             </div>
             <!-- /.navbar-collapse -->
@@ -94,22 +99,26 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container" ng-controller="HopsController as vm">
+    <div class="container-fluid pull-left" ng-controller="HopsController as vm">
         <div class="row">
             <div>
                 <div title="{{vm.title}}"></div>
-                {{vm.title}}
+                <h2>{{vm.title}}</h2>
                 <div>
-                    <table class="table table-condensed table-hover">
+                    <table class="table table-condensed table-hover table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>Hops</th>
+                            <th class="col-md-2">Hops</th>
+                            <th>Country of Origin</th>
+                            <th>Alpha</th>
                             <th>Description</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="h in vm.hops">
-                            <td>{{h.name}}</td>
+                            <td class="col-md-2"><strong>{{h.name}}</strong></td>
+                            <td class="col-md-2">{{h.countryOfOrigin}}</td>
+                            <td>{{h.alphaAcidMin}}</td>
                             <td>{{h.description}}</td>
                         </tr>
                         </tbody>
