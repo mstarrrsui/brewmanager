@@ -71,7 +71,7 @@
 
 </head>
 
-<body class="mypage" ng-app="brewApp">
+<body class="mypage" ng-app="brewApp"  ng-cloak>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -137,6 +137,8 @@
                 </div>
                 <div class="panel-body">
                     <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p>Filter <input name="filterHops" ng-model="q"/></p>
+                    <p><a ng-click="vm.prevPage()">Prev</a> Current page:{{vm.currPage}}  Total Pages:{{vm.totalPages}}   <a ng-click="vm.nextPage()">Next</a> </p>
                 </div>
                 <div>
                     <table class="table table-condensed table-hover table-bordered table-striped">
@@ -150,7 +152,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="h in vm.hops">
+                        <tr ng-repeat="h in vm.currPageData | orderBy:'name' | filter:q">
                             <td class="vert-align"><span class="glyphicon glyphicon-trash text-successs"></span></td>
                             <td class="vert-align col-md-2"><strong><span ng-click="vm.clickMe(h.name)">{{h.name}}</span></strong></td>
                             <td class="vert-align col-md-2">{{h.countryOfOrigin}}</td>
