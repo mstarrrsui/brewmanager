@@ -6,12 +6,13 @@
             /* Angular modules */
             'ngAnimate',
             'ngSanitize',
+            'ngRoute',
             /* Cross-app modules */
             'blocks.exception',
             'blocks.logger',
-            'blocks.router',
+            //'blocks.router',
             /* 3rd-party modules */
-            'ui.router',
+            //'ui.router',
             'ngplus'
         ]);
 

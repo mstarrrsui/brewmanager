@@ -1,0 +1,231 @@
+
+<div class="row">
+
+
+        <div class="tag-box tag-box-v3 col-md-10">
+
+            <div class="headline"><h3>Editing: <span class="color-dark-blue">{{vm.hop.name}}</span></h3></div>
+
+            <form class="margin-bottom-40" role="form">
+                <div class="form-group">
+                    <label for="hopId">Id</label>
+                    <input type="text" class="form-control" id="hopId" disabled ng-model="vm.hop.id">
+                </div>
+                <div class="form-group">
+                    <label for="hopName">Name</label>
+                    <input type="text" class="form-control" id="hopName" placeholder="Hop Name" ng-model="vm.hop.name">
+                </div>
+                <div class="form-group">
+                    <label for="hopDescription">Description</label>
+                    <textarea class="form-control" rows="4" id="hopDescription" placeholder="Description" ng-model="vm.hop.description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Check me out
+                    </label>
+                </div>
+                <button type="submit" class="btn-u btn-u-blue">Submit</button>
+            </form>
+
+
+
+            <div class="panel panel-red margin-bottom-40">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-tasks"></i> Input groups</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Extend form controls by adding text or buttons before, after, or on both sides of any text-based input. Use <code>.input-group</code> with an <code>.input-group-addon</code> to prepend or append elements to a <code>.form-control</code>.</p><br>
+
+                    <div class="row margin-bottom-40">
+                        <!--Basic Example-->
+                        <div class="col-md-6">
+                            <h4>Basic Example</h4>
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <!--End Basic Example-->
+
+                        <!--Checkboxes and Radio Addons-->
+                        <div class="col-md-6">
+                            <h4>Checkboxes and Radio Addons</h4>
+                            <div class="input-group">
+										<span class="input-group-addon">
+											<input type="checkbox">
+										</span>
+                                <input type="text" class="form-control">
+                            </div>
+
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+										<span class="input-group-addon">
+											<input type="radio">
+										</span>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <!--End Checkboxes and Radio Addons-->
+                    </div>
+
+                    <h4>Button Addons and Buttons with Dropdowns</h4>
+                    <p>Buttons in input groups are a bit different and require one extra level of nesting. Instead of <code>.input-group-addon</code>, you'll need to use <code>.input-group-btn</code> to wrap the buttons. This is required due to default browser styles that cannot be overridden.</p><br>
+
+                    <div class="row">
+                        <!--Button Addons-->
+                        <div class="col-md-6">
+                            <div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-danger" type="button">Go!</button>
+										</span>
+                                <input type="text" class="form-control">
+                            </div>
+
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+										<span class="input-group-btn">
+											<button class="btn btn-danger" type="button">Go!</button>
+										</span>
+                            </div>
+                        </div>
+                        <!--End Button Addons-->
+
+                        <!--Buttons with Dropdowns-->
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                        Action
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                                <input type="text" class="form-control">
+                            </div>
+
+                            <div class="margin-bottom-10"></div>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                        Action
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Buttons with Dropdowns-->
+                    </div>
+                </div>
+            </div>
+
+            <!--Inputs-->
+            <h4>Inputs</h4>
+            <p>Most common form control, text-based input fields. Includes support for all HTML5 types:
+                <code>text</code>, <code>password</code>, <code>datetime</code>, <code>datetime-local</code>, <code>date</code>,
+                <code>month</code>, <code>time</code>, <code>week</code>, <code>number</code>, <code>email</code>, <code>url</code>,
+                <code>search</code>, <code>tel</code>, and <code>color</code>.</p><br>
+            <input type="text" class="form-control" placeholder="Text input">
+            <!--End Inputs-->
+
+            <div class="margin-bottom-40"></div>
+
+            <!--Textarea-->
+            <h4>Textarea</h4>
+            <p>Form control which supports multiple lines of text. Change <code>rows</code> attribute as necessary.</p><br>
+            <textarea class="form-control" rows="7"></textarea>
+            <!--End Textarea-->
+
+            <div class="margin-bottom-40"></div>
+
+            <!--Checkboxes and Radios-->
+            <h4>Checkboxes and Radios</h4>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="">
+                    Option one is this and that&mdash;be sure to include why it's great
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                    Option one is this and that&mdash;be sure to include why it's great
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    Option two can be something else and selecting it will deselect option one
+                </label>
+            </div>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+            </label>
+            <label class="checkbox-inline">
+                <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+            </label>
+            <!--End Checkboxes and Radios-->
+
+            <div class="margin-bottom-40"></div>
+
+            <!--Selects-->
+            <h4>Selects</h4>
+            <p>Use the default option, or add <code>multiple</code> to show multiple options at once.</p><br>
+            <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <select multiple class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <!--End Selects-->
+        </div>
+
+</div>
+

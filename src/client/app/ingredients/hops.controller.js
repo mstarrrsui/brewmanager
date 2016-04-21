@@ -14,9 +14,9 @@
         vm.hops = [];
         vm.currPageData = [];
         vm.title = 'Hops';
-        vm.currPage;
+        vm.currPage = 1;
         vm.pageSize = 20;
-        vm.totalPages;
+        vm.totalPages = -1;
         vm.clickMe = clickMe;
         vm.nextPage = nextPage;
         vm.prevPage = prevPage;

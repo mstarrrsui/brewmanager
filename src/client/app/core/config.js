@@ -13,8 +13,8 @@
     }
 
     var config = {
-        appErrorPrefix: '[GulpPatterns Error] ', //Configure the exceptionHandler decorator
-        appTitle: 'Gulp Patterns Demo',
+        appErrorPrefix: '[BrewManager Error] ', //Configure the exceptionHandler decorator
+        appTitle: 'BrewManager',
         imageBasePath: '/images/photos/',
         unknownPersonImageSource: 'unknown_person.jpg'
     };
@@ -23,11 +23,11 @@
 
     core.config(configure);
 
-    configure.$inject = ['$compileProvider', '$logProvider',
-                         'routerHelperProvider', 'exceptionHandlerProvider'];
+    configure.$inject = ['$compileProvider', '$logProvider', '$routeProvider', '$locationProvider', 'exceptionHandlerProvider'];
     /* @ngInject */
     function configure ($compileProvider, $logProvider,
-                         routerHelperProvider, exceptionHandlerProvider) {
+                        $routeProvider, $locationProvider,
+                        exceptionHandlerProvider) {
         $compileProvider.debugInfoEnabled(false);
 
         // turn debugging off/on (no info or warn)
@@ -35,11 +35,29 @@
             $logProvider.debugEnabled(true);
         }
         exceptionHandlerProvider.configure(config.appErrorPrefix);
-        configureStateHelper();
+        //configureStateHelper();
 
+        /////////
+        $routeProvider.when('/hops',
+            {
+                templateUrl:'app/ingredients/hops.html',
+                controller:'HopsController',
+                controllerAs:'vm'
+            })
+
+        $routeProvider.when('/hops/:id',
+            {
+                templateUrl:'app/ingredients/hops.edit.html',
+                controller:'HopsEditController',
+                controllerAs:'vm'
+            })
+
+        $routeProvider.otherwise({redirectTo: '/'});
+
+        $locationProvider.html5Mode(true);
         ////////////////
 
-        function configureStateHelper() {
+        /*function configureStateHelper() {
             var resolveAlways = {
                 ready: ready
             };
@@ -53,6 +71,6 @@
                 docTitle: 'Gulp: ',
                 resolveAlways: resolveAlways
             });
-        }
+        }*/
     }
 })();

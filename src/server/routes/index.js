@@ -7,7 +7,7 @@ module.exports = function(app) {
     app.get(api + '/customers', getCustomers);
     app.get(api + '/beerstyle/:id', getBeerStyle);
     app.get(api + '/beerstyles', getBeerStyles);
-    app.get(api + '/hops/:id', getHop);
+    app.get(api + '/hop/:id', getHop);
     app.get(api + '/hops', getHops);
 
     function getCustomer(req, res, next) {

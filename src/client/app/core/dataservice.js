@@ -12,6 +12,7 @@
 
         var service = {
             getHops: getHops,
+            getHop: getHop,
             ready: ready
         };
 
@@ -26,6 +27,19 @@
                 });
 
             function getHopsComplete(data, status, headers, config) {
+                return data.data;
+            }
+        }
+
+        function getHop(id) {
+            return $http.get('/api/hop/' + id)
+                .then(getHopComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed for getHops')(message);
+                    $location.url('/');
+                });
+
+            function getHopComplete(data, status, headers, config) {
                 return data.data;
             }
         }

@@ -24,14 +24,14 @@
 
     <!-- inject:css -->
 
-    <!--<link rel="stylesheet" href="/src/client/styles/bootstrap-flatly.css">-->
+    <link rel="stylesheet" href="/src/client/styles/bootstrap-flatly.css">
 
     <!-- endinject -->
 
 
 
     <!-- Unify css -->
-    <!--<link rel="stylesheet" href="/src/client/styles/unify/style.css">-->
+    <link rel="stylesheet" href="/src/client/styles/unify/style.css">
 
     <!-- CSS Header and Footer -->
     <!--<link rel="stylesheet" href="/src/client/styles/unify/headers/header-default.css">
@@ -103,11 +103,11 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ingredients <span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ingredients <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Hops</a></li>
-                            <li><a href="#">Yeasts</a></li>
-                            <li><a href="#">Grains</a></li>
+                            <li><a href="/hops">Hops</a></li>
+                            <li><a>Yeasts</a></li>
+                            <li><a>Grains</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -127,44 +127,12 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container content" ng-controller="HopsController as vm">
-
-
-        <div class="row">
-            <div class="panel panel-blue margin-bottom-40">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-tasks"></i> {{vm.title}}</h3>
-                </div>
-                <div class="panel-body">
-                    <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p>Filter <input name="filterHops" ng-model="q"/></p>
-                    <p><a ng-click="vm.prevPage()">Prev</a> Current page:{{vm.currPage}}  Total Pages:{{vm.totalPages}}   <a ng-click="vm.nextPage()">Next</a> </p>
-                </div>
-                <div>
-                    <table class="table table-condensed table-hover table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th class="bg-info"></th>
-                            <th class="col-md-2 bg-info">Hops</th>
-                            <th class="bg-info">Country of Origin</th>
-                            <th class="bg-info">Alpha</th>
-                            <th class="bg-info">Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="h in vm.currPageData | orderBy:'name' | filter:q">
-                            <td class="vert-align"><span class="glyphicon glyphicon-trash text-successs"></span></td>
-                            <td class="vert-align col-md-2"><strong><span ng-click="vm.clickMe(h.name)">{{h.name}}</span></strong></td>
-                            <td class="vert-align col-md-2">{{h.countryOfOrigin}}</td>
-                            <td class="vert-align">{{h.alphaAcidMin}}</td>
-                            <td class="vert-align">{{h.description}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div class="container content">
+        <ng-view></ng-view>
     </div>
+
+
+
 
 
 
@@ -179,6 +147,7 @@
     <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
     <script src="/bower_components/toastr/toastr.js"></script>
     <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
 
 
@@ -188,16 +157,15 @@
     <script src="/src/client/app/ingredients/ingredients.module.js"></script>
     <script src="/src/client/app/blocks/logger/logger.module.js"></script>
     <script src="/src/client/app/blocks/exception/exception.module.js"></script>
-    <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/app.js"></script>
     <script src="/src/client/app/core/config.js"></script>
     <script src="/src/client/app/core/constants.js"></script>
     <script src="/src/client/app/core/dataservice.js"></script>
     <script src="/src/client/app/ingredients/hops.controller.js"></script>
+    <script src="/src/client/app/ingredients/hops.edit.controller.js"></script>
     <script src="/src/client/app/blocks/logger/logger.js"></script>
     <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/src/client/app/blocks/exception/exception.js"></script>
-    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
     <!-- endinject -->
 
 
