@@ -4,25 +4,31 @@
 
         <div class="tag-box tag-box-v3 col-md-10">
 
-            <div class="headline"><h3>Editing: <span class="color-dark-blue">{{vm.hop.name}}</span></h3></div>
+            <div class="headline"><h3><i class="fa fa-tasks"></i> Editing: <span class="color-dark-blue">{{vm.hop.name}}</span></h3></div>
 
             <form class="margin-bottom-40" role="form">
+
                 <div class="form-group">
                     <label for="hopId">Id</label>
-                    <input type="text" class="form-control" id="hopId" disabled ng-model="vm.hop.id">
+                    <input type="text" class="form-control" id="hopId" disabled ng-model="vm.editableHop.id">
                 </div>
                 <div class="form-group">
                     <label for="hopName">Name</label>
-                    <input type="text" class="form-control" id="hopName" placeholder="Hop Name" ng-model="vm.hop.name">
+                    <input type="text" class="form-control" id="hopName" placeholder="Hop Name" ng-model="vm.editableHop.name">
                 </div>
                 <div class="form-group">
                     <label for="hopDescription">Description</label>
-                    <textarea class="form-control" rows="4" id="hopDescription" placeholder="Description" ng-model="vm.hop.description"></textarea>
+                    <textarea class="form-control" rows="4" id="hopDescription" placeholder="Description" ng-model="vm.editableHop.description"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="hopType">Type</label>
+                    <select class="form-control" id="hopType" ng-model="vm.editableHop.type">
+                        <option>Bittering</option>
+                        <option>Flavoring</option>
+                        <option>Aroma</option>
+                    </select>
                 </div>
+
                 <div class="checkbox">
                     <label>
                         <input type="checkbox"> Check me out

@@ -1,9 +1,7 @@
 
 <div class="row">
-    <div class="panel panel-blue margin-bottom-40">
-        <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-tasks"></i> {{vm.title}}</h3>
-        </div>
+    <div class="tag-box tag-box-v3 col-md-10">
+        <div class="headline"><h3><i class="fa fa-tasks"></i> {{vm.title}}</h3></div>
         <div class="panel-body">
             <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
             <p>Filter <input name="filterHops" ng-model="q"/></p>
@@ -17,6 +15,7 @@
                     <th class="col-md-2">Hops</th>
                     <th class="">Country of Origin</th>
                     <th class="">Alpha</th>
+                    <th class="">Type</th>
                     <th class="">Description</th>
                 </tr>
                 </thead>
@@ -25,7 +24,8 @@
                     <td class="vert-align"><span class="glyphicon glyphicon-trash text-successs"></span></td>
                     <td class="vert-align col-md-2"><strong><a href="/hops/{{h.id}}">{{h.name}}</a></strong></td>
                     <td class="vert-align col-md-2">{{h.countryOfOrigin}}</td>
-                    <td class="vert-align">{{h.alphaAcidMin}}</td>
+                    <td class="vert-align">{{h.alphaAcid | number:2}}</td>
+                    <td class="vert-align">{{h.type}}</td>
                     <td class="vert-align">{{h.description}}</td>
                 </tr>
                 </tbody>
