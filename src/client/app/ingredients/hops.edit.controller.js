@@ -5,16 +5,23 @@
         .module('app.ingredients')
         .controller('HopsEditController', HopsEditController);
 
-    HopsEditController.$inject = ['$http', '$routeParams', 'dataservice', 'logger'];
+    HopsEditController.$inject = ['$scope', '$http', '$routeParams', 'dataservice', 'logger', 'hopsFilter'];
     /* @ngInject */
-    function HopsEditController($http, $routeParams, dataservice, logger) {
+    function HopsEditController($scope, $http, $routeParams, dataservice, logger) {
         var vm = this;
         vm.hopId = $routeParams.id;
         vm.hop = {};
         vm.editableHop = {};
         vm.submitForm = submitForm;
 
+
         activate();
+
+        $scope.$watch(function () {
+            return vm.editableHop.name;
+        },function(value){
+            console.log(value);
+        });
 
         function activate() {
             return dataservice.getHop(vm.hopId).then(function(data) {

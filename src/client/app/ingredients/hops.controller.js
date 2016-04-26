@@ -5,11 +5,13 @@
         .module('app.ingredients')
         .controller('HopsController', HopsController);
 
-    HopsController.$inject = ['$http', 'dataservice', 'logger'];
+    HopsController.$inject = ['$scope','$http', 'dataservice', 'logger', 'hopsFilter'];
     /* @ngInject */
-    function HopsController($http, dataservice, logger) {
+    function HopsController($scope, $http, dataservice, logger, hopsFilter) {
         var vm = this;
         vm.sortorder = 'countryOfOrigin';
+        vm.searchCriteria = '';
+        vm.filterString = '';
         vm.hopFilter = '';
         vm.hops = [];
         vm.currPageData = [];
@@ -23,12 +25,23 @@
 
         activate();
 
+        $scope.$watch(function () {
+            return vm.filterString;
+        },function(value){
+            //console.log(value);
+        });
+
+
+
+
         function activate() {
             return getHops().then(function() {
                 setCurrPageData(1);
                 logger.info('Activated Hops View');
             });
         }
+
+
 
         function setCurrPageData(page) {
             vm.currPage = page;
