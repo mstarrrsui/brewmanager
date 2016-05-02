@@ -46,11 +46,25 @@
         function setCurrPageData(page) {
 
             filterData();
-            vm.currPage = page;
-            vm.currPageData = _.slice(vm.filteredData,
-                ((page - 1) * vm.pageSize),
-                (page * vm.pageSize));
+            determineCurrPage(page);
+
         }
+
+        function determineCurrPage(page){
+            if (page > vm.totalPages)  {
+                vm.currPage = vm.totalPages;
+                return;
+            } else if (page < 1) {
+                vm.currPage = 1;
+                return;
+            } else {
+                vm.currPage = page;
+            }
+            vm.currPageData = _.slice(vm.filteredData,
+                ((vm.currPage - 1) * vm.pageSize),
+                (vm.currPage * vm.pageSize));
+        }
+
 
         function prevPage() {
             setCurrPageData(vm.currPage - 1);
@@ -68,6 +82,7 @@
                         o.description.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1
                 });
             }
+            vm.totalPages = Math.round(vm.filteredData.length / vm.pageSize);
         }
 
 
@@ -75,7 +90,7 @@
         function getHops() {
             return dataservice.getHops().then(function(data) {
                 vm.hops = data;
-                vm.totalPages = vm.hops.length / vm.pageSize;
+
                 return vm.hops;
             });
         }
