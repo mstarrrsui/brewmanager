@@ -32,16 +32,12 @@
         });
 
 
-
-
         function activate() {
             return getHops().then(function() {
                 setCurrPageData(1);
                 logger.info('Activated Hops View');
             });
         }
-
-
 
         function setCurrPageData(page) {
 

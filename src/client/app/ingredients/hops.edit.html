@@ -2,7 +2,7 @@
 <div class="row">
 
 
-        <div class="tag-box tag-box-v3 col-md-10">
+        <div class="tag-box tag-box-v3 col-md-7">
 
             <div class="headline"><h3><i class="fa fa-tasks"></i> Editing: <span class="color-dark-blue">{{vm.hop.name}}</span></h3></div>
 
@@ -26,6 +26,14 @@
                         <option>Bittering</option>
                         <option>Flavoring</option>
                         <option>Aroma</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hopUseIn">Use In</label>
+                    <select class="form-control" id="hopUseIn" ng-model="vm.editableHop.useIn">
+                        <option>Boil</option>
+                        <option>Dry Hop</option>
                     </select>
                 </div>
 
@@ -231,6 +239,10 @@
                 <option>5</option>
             </select>
             <!--End Selects-->
+        </div>
+
+        <div class="col-md-5">
+            <pre>{{vm.editableHop | json}}</pre>
         </div>
 
 </div>
