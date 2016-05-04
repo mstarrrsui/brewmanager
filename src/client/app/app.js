@@ -5,7 +5,7 @@
 var brewApp = angular.module('brewApp', [
     /* Shared modules */
     'app.core',
-    //'app.widgets',
+    'app.widgets',
 
     /* Feature areas */
     'app.ingredients',

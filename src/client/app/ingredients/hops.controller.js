@@ -88,7 +88,7 @@
 
 
         function getHops() {
-            return dataservice.getHops().then(function(data) {
+            return dataservice.getHops().then(function (data) {
                 vm.data = data;
             });
         }
