@@ -21,6 +21,10 @@
         vm.clickMe = clickMe;
         vm.nextPage = nextPage;
         vm.prevPage = prevPage;
+        vm.debugdata = {
+            filterstring: vm.filterString,
+            totalpages: vm.totalPages
+        };
 
         activate();
 
@@ -56,6 +60,7 @@
             } else {
                 vm.currPage = page;
             }
+
             vm.currPageData = _.slice(vm.filteredData,
                 ((vm.currPage - 1) * vm.pageSize),
                 (vm.currPage * vm.pageSize));
@@ -78,7 +83,7 @@
                         o.description.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1
                 });
             }
-            vm.totalPages = Math.round(vm.filteredData.length / vm.pageSize);
+            vm.totalPages = Math.ceil(vm.filteredData.length / vm.pageSize);
         }
 
 
