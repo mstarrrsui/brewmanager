@@ -37,6 +37,13 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="hopCountry">Country Of Origin</label>
+                    <select class="form-control" id="hopCountry" ng-model="vm.editableHop.countryOfOrigin"
+                            ng-options="country.name as country.name for country in vm.countries">
+                    </select>
+                </div>
+
                 <div class="checkbox">
                     <label>
                         <input type="checkbox"> Check me out

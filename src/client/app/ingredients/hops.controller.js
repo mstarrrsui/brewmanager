@@ -10,9 +10,8 @@
     function HopsController($scope, $http, dataservice, logger, hopsFilter) {
         var vm = this;
         vm.filterString = '';
-        vm.hopFilter = '';
-        vm.hops = [];
         vm.filteredData = [];
+        vm.data = [];
         vm.currPageData = [];
         vm.title = 'Hops';
         vm.currPage = 1;
@@ -76,7 +75,7 @@
         }
 
         function filterData() {
-            vm.filteredData = vm.hops;
+            vm.filteredData = vm.data;
             if (vm.filterString !== '') {
                 vm.filteredData = _.filter(vm.filteredData, function(o) {
                     return o.name.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1 ||
@@ -90,9 +89,7 @@
 
         function getHops() {
             return dataservice.getHops().then(function(data) {
-                vm.hops = data;
-
-                return vm.hops;
+                vm.data = data;
             });
         }
 
