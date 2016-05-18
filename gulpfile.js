@@ -56,24 +56,22 @@ gulp.task('optimize', ['inject'], function() {
 });
 
 
-
-
 gulp.task('clean', function(done) {
     var delconfig = [].concat(config.build, config.temp);
     log('Cleaning: ' + $.util.colors.blue(delconfig));
-    del(delconfig, done);
+    return del(delconfig).then(log('delete done'));
 });
 
 gulp.task('clean-fonts', function(done) {
-    clean(config.build + 'fonts/**/*.*', done);
+    return clean(config.build + 'fonts/**/*.*');
 });
 
 gulp.task('clean-images', function(done) {
-    clean(config.build + 'images/**/*.*', done);
+    return clean(config.build + 'images/**/*.*');
 });
 
 gulp.task('clean-styles', function(done) {
-    clean(config.temp + '**/*.css', done);
+    return clean(config.temp + '**/*.css');
 });
 
 gulp.task('clean-code', function(done) {
@@ -82,7 +80,7 @@ gulp.task('clean-code', function(done) {
         config.build + '**/*.html',
         config.build + 'js/**/*.js'
     );
-    clean(files, done);
+    return clean(files);
 });
 
 
@@ -147,9 +145,12 @@ gulp.task('serve-dev', ['inject'], function () {
 });
 
 /////////////////////
-function clean(path, done) {
+function clean(path) {
+
     log('Cleaning: ' + $.util.colors.blue(path));
-    del(path, done);
+
+    return del(path).then(log('delete done'));
+
 }
 
 
