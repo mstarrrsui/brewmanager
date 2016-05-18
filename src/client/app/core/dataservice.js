@@ -13,6 +13,7 @@
         var service = {
             getHops: getHops,
             getHop: getHop,
+            getRoles: getRoles,
             ready: ready
         };
 
@@ -40,6 +41,20 @@
                 });
 
             function getHopComplete(data, status, headers, config) {
+                return data.data;
+            }
+        }
+
+
+        function getRoles() {
+            return $http.get('http://localhost/winauthapi/api/roles/getroles', {withCredentials: true})
+                .then(getRolesComplete)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed for getRoles')(message);
+                    $location.url('/');
+                });
+
+            function getRolesComplete(data, status, headers, config) {
                 return data.data;
             }
         }

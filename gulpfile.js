@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var args = require('yargs').argv;
 var browserSync = require('browser-sync');
 var config = require('./gulp.config')();
-//var del = require('del');
+var del = require('del');
 //var path = require('path');
 //var _ = require('lodash');
 var $ = require('gulp-load-plugins')({lazy: true});
@@ -46,6 +46,68 @@ gulp.task('inject', ['wiredep'], function () {
         .pipe(gulp.dest(config.client));
 });
 
+
+gulp.task('optimize', ['inject'], function() {
+   log('Optimizing the javascript, css, html');
+
+    return gulp
+        .src(config.index)
+        .pipe($.plumber());
+});
+
+
+
+
+gulp.task('clean', function(done) {
+    var delconfig = [].concat(config.build, config.temp);
+    log('Cleaning: ' + $.util.colors.blue(delconfig));
+    del(delconfig, done);
+});
+
+gulp.task('clean-fonts', function(done) {
+    clean(config.build + 'fonts/**/*.*', done);
+});
+
+gulp.task('clean-images', function(done) {
+    clean(config.build + 'images/**/*.*', done);
+});
+
+gulp.task('clean-styles', function(done) {
+    clean(config.temp + '**/*.css', done);
+});
+
+gulp.task('clean-code', function(done) {
+    var files = [].concat(
+        config.temp + '**/*.js',
+        config.build + '**/*.html',
+        config.build + 'js/**/*.js'
+    );
+    clean(files, done);
+});
+
+
+//gulp.task('build',['clean-fonts','fonts']);
+
+gulp.task('fonts', ['clean-fonts'], function() {
+    console.log('blah');
+    log('Copying fonts');
+
+    return gulp
+        .src(config.fonts)
+        .pipe(gulp.dest(config.build + 'fonts'));
+});
+
+
+gulp.task('images', ['clean-images'], function() {
+    log('Copying and compressing the images');
+
+    return gulp
+        .src(config.images)
+        .pipe($.imagemin({optimizationLevel: 4}))
+        .pipe(gulp.dest(config.build + 'images'));
+});
+
+
 gulp.task('serve-dev', ['inject'], function () {
 
     var isDev = true;
@@ -85,6 +147,11 @@ gulp.task('serve-dev', ['inject'], function () {
 });
 
 /////////////////////
+function clean(path, done) {
+    log('Cleaning: ' + $.util.colors.blue(path));
+    del(path, done);
+}
+
 
 function log(msg) {
     if (typeof(msg) === 'object') {
