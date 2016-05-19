@@ -12,14 +12,14 @@
     <title>Brew manager</title>
 
 
-    <!-- build:css styles/lib.css -->
+
     <!-- bower:css -->
     <link rel="stylesheet" href="styles/bootstrap-flatly.css" />
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/bower_components/animate.css/animate.css" />
     <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
     <!-- endbower -->
-    <!-- endbuild -->
+
 
 
     <!-- inject:css -->
@@ -32,6 +32,19 @@
 
     <!-- Unify css -->
     <link rel="stylesheet" href="/src/client/styles/unify/style.css">
+
+    <!-- CSS Header and Footer -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/headers/header-default.css">
+    <link rel="stylesheet" href="/src/client/styles/unify/footers/footer-v1.css">-->
+
+
+
+    <!-- CSS Theme -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/theme-colors/aqua.css" id="style_color">
+    <link rel="stylesheet" href="/src/client/styles/unify/theme-skins/dark.css">-->
+
+    <!-- CSS Customization -->
+    <!--<link rel="stylesheet" href="/src/client/styles/unify/custom.css">-->
 
     <!-- Inline CSS -->
     <style>
@@ -60,58 +73,7 @@
 
 <body class="mypage" ng-app="brewApp"  ng-cloak>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div style="margin-left: 10px">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Brew Manager</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Brewing Log</a>
-                    </li>
-                    <li>
-                        <a href="#">Recipes</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profiles <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Equipment</a></li>
-                            <li><a href="#">Mash</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ingredients <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/hops">Hops</a></li>
-                            <li><a>Yeasts</a></li>
-                            <li><a>Grains</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" style="margin-right: 10px">
-                    <li>
-                        <button type="button" class="btn btn-link navbar-btn">
-                            <span class="glyphicon glyphicon-log-in"></span> Log In
-                        </button>
-                    </li>
-                </ul>
 
-                <!--<a class="btn btn-default navbar-btn navbar-right glyphicon-log-in"></a>-->
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
     <!-- Page Content -->
     <div class="container content" ng-controller="HomeController as vm">
@@ -120,7 +82,7 @@
         <ng-view></ng-view>
     </div>
 
-    <!-- build:js js/lib.js-->
+
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -134,9 +96,9 @@
     <script src="/bower_components/moment/moment.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
-    <!-- endbuild -->
 
-    <!-- build:js js/app.js-->
+
+
     <!-- inject:js -->
     <script src="/src/client/app/core/core.module.js"></script>
     <script src="/src/client/app/widgets/widgets.module.js"></script>
@@ -156,7 +118,6 @@
     <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/src/client/app/blocks/exception/exception.js"></script>
     <!-- endinject -->
-    <!-- endbuild -->
 
 
 </body>

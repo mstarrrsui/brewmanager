@@ -50,9 +50,13 @@ gulp.task('inject', ['wiredep'], function () {
 gulp.task('optimize', ['inject'], function() {
    log('Optimizing the javascript, css, html');
 
+    var assets = $.useref({searchPath: './'});
+
     return gulp
         .src(config.index)
-        .pipe($.plumber());
+        .pipe($.plumber())
+        .pipe($.useref({searchPath: './'}))
+        .pipe(gulp.dest(config.build));
 });
 
 
@@ -87,7 +91,7 @@ gulp.task('clean-code', function(done) {
 //gulp.task('build',['clean-fonts','fonts']);
 
 gulp.task('fonts', ['clean-fonts'], function() {
-    console.log('blah');
+
     log('Copying fonts');
 
     return gulp
@@ -144,7 +148,7 @@ gulp.task('serve-dev', ['inject'], function () {
         });
 });
 
-/////////////////////
+/////////////////////  MY FUNCTIONS /////////////////////////////
 function clean(path) {
 
     log('Cleaning: ' + $.util.colors.blue(path));
