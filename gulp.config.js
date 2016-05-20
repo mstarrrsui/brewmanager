@@ -32,7 +32,7 @@ module.exports = function () {
             clientApp + '**/*.js',
             '!' + clientApp + '**/*.spec.js'
         ],
-        less: client + 'styles/styles.less',
+        //less: client + 'styles/styles.less',
         report: report,
         root: root,
         server: server,
@@ -44,6 +44,18 @@ module.exports = function () {
         optimized: {
             app: 'app.js',
             lib: 'lib.js'
+        },
+
+        /**
+         * template cache
+         */
+        templateCache: {
+            file: 'templates.js',
+            options: {
+                module: 'app.core',
+                standAlone: false,
+                root: 'app/'
+            }
         },
 
         /**
