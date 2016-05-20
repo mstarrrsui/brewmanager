@@ -16,7 +16,7 @@
     "bootstrap": {
       "main": [
         "dist/js/bootstrap.js",
-        "../../src/client/styles/bootstrap-flatly.css",
+        "/src/client/styles/bootstrap-flatly.css",
         "less/bootstrap.less"
       ]
     }
