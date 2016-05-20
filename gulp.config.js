@@ -22,7 +22,10 @@ module.exports = function () {
         client: client,
         theme: clientStyle + 'bootstrap-flatly.css',
         css: temp + 'styles.css',
-        fonts: './bower_components/font-awesome/fonts/**/*.*',
+        fonts: [
+            './bower_components/font-awesome/fonts/**/*.*',
+            client + 'fonts/**/*.*'
+        ],
         html: clientApp + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'img/**/*.*',
