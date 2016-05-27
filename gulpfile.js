@@ -66,6 +66,8 @@ gulp.task('optimize', ['inject'], function() {
 
     var assets = $.useref({searchPath: './'});
     var templateCache = config.temp + config.templateCache.file;
+    var cssFilter = $.filter(['**/*.css'],{restore:true});
+    var jsFilter = $.filter(['**/*.js'],{restore:true});
 
     return gulp
         .src(config.index)
@@ -74,7 +76,13 @@ gulp.task('optimize', ['inject'], function() {
             gulp.src(templateCache, {read: false}), {
                 starttag: '<!-- inject:templates:js -->'
             }))
-        .pipe($.useref({searchPath: './'}))
+        .pipe(assets)
+        .pipe(cssFilter)
+        .pipe($.csso())
+        .pipe(cssFilter.restore)
+        .pipe(jsFilter)
+        .pipe($.uglify())
+        .pipe(jsFilter.restore)
         .pipe(gulp.dest(config.build));
 });
 
