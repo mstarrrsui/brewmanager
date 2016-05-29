@@ -61,7 +61,7 @@ gulp.task('inject', ['wiredep', 'templatecache'], function () {
 });
 
 
-gulp.task('optimize', ['inject'], function() {
+gulp.task('optimize', ['inject', 'images', 'fonts'], function() {
    log('Optimizing the javascript, css, html');
 
     var assets = $.useref({searchPath: './'});
