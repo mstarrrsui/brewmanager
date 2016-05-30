@@ -5,9 +5,9 @@
         .module('app.core')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope','$http', 'dataservice', 'logger', 'exception'];
+    HomeController.$inject = ['$scope','$http', 'dataservice', 'userservice', 'logger', 'exception', '$sessionStorage'];
     /* @ngInject */
-    function HomeController($scope, $http, dataservice, logger, exception) {
+    function HomeController($scope, $http, dataservice, userservice, logger, exception, $sessionStorage) {
         var vm = this;
         vm.getRoles = getRoles;
         vm.regemail = null;
@@ -16,62 +16,57 @@
         vm.username = null;
         vm.password = null;
         vm.submitRegister = submitRegister;
-        vm.submitLogin = submitLogin;
+        vm.getToken = getToken;
         vm.results = null;
  
 
         function submitRegister() {
-            logger.info('Clicked on register!!  email:' + vm.regemail);
-            registerUser();
-        }
-
-        function submitLogin() {
-            logger.info('Clicked on login!!');
-        }
-
-        function registerUser() {
-
-            var data = {
+            var userinfo = {
                 Email: vm.regemail,
                 Password: vm.regpwd,
                 ConfirmPassword: vm.regpwdconfirm
             };
+            return registerUser(userinfo).then(function() {
+                logger.info('User registered');
+            });
+        }
+
+        function getToken() {
+            getTokenFromAPI();
+        }
+
+
+        function getTokenFromAPI() {
+
+            var data = $.param({
+                grant_type: 'password',
+                username: vm.username,
+                password: vm.password
+            });
 
             var config = {
                 headers : {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 }
             }
 
             //var apiURL ='https://microsoft-apiappb8abebc3cac44655b692cf898ef41749.azurewebsites.net';
             var apiURL = 'http://localhost:33116';
-            
-            $http.post(apiURL + '/api/account/register', data, config)
+
+            $http.post(apiURL + '/token', data, config)
                 .then(function (data, status, headers, config) {
-                    logger.info("Successfully called register");
+                    logger.info("Successfully called gettoken!");
+                    $sessionStorage.userdata = data;
+
                 })
                 .catch(function(message) {
-                    exception.catcher('XHR Failed for register')(message);
+                    exception.catcher('XHR Failed for gettoken')(message);
                 });
 
 
         }
 
-        function getRoles() {
-            //logger.info('Clicked on button!!');
-            vm.data = null;
-            setTimeout(function() {
-                getRolesViaApi().then(function () {
-                    logger.info('Got Data');
-                });
-            }, 10);
-        }
-
-        function getRolesViaApi() {
-            return dataservice.getRoles().then(function (data) {
-                vm.data = data;
-            });
-        }
+        
     }
 })();
 

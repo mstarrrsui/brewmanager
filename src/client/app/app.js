@@ -9,6 +9,7 @@ var brewApp = angular.module('brewApp', [
 
     /* Feature areas */
     'app.ingredients',
+    'app.account'
     //'app.dashboard',
     //'app.layout'
 ]);

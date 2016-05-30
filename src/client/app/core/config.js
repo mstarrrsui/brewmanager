@@ -38,6 +38,21 @@
         //configureStateHelper();
 
         /////////
+
+        $routeProvider.when('/login',
+            {
+                templateUrl:'app/account/login.html',
+                controller:'LoginController',
+                controllerAs:'vm'
+            })
+
+        $routeProvider.when('/register',
+            {
+                templateUrl:'app/account/register.html',
+                controller:'RegisterController',
+                controllerAs:'vm'
+            })
+        
         $routeProvider.when('/hops',
             {
                 templateUrl:'app/ingredients/hops.html',
