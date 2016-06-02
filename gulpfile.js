@@ -29,7 +29,6 @@ gulp.task('templatecache', ['clean-code'], function() {
 
     return gulp
         .src(config.htmltemplates)
-        //.pipe($.minifyHtml({empty: true}))
         .pipe($.htmlmin({collapseWhitespace: true}))
         .pipe($.angularTemplatecache(
             config.templateCache.file,
@@ -45,11 +44,14 @@ gulp.task('wiredep', function () {
 
     return gulp
         .src(config.index)
-        .pipe(wiredep(options))
-        .pipe($.inject(gulp.src(config.js)))
+        .pipe(wiredep(options)) //bower stuff
+        .pipe($.inject(gulp.src(config.js))) //app stuff
         .pipe(gulp.dest(config.client));
 });
 
+//
+// inject deals with CSS, but calls wiredep for JS injection
+//
 gulp.task('inject', ['wiredep', 'templatecache'], function () {
     log('Wire up the app css into the html, and call wiredep ');
 
@@ -67,23 +69,58 @@ gulp.task('optimize', ['inject', 'images', 'fonts'], function() {
     var assets = $.useref({searchPath: './'});
     var templateCache = config.temp + config.templateCache.file;
     var cssFilter = $.filter(['**/*.css'],{restore:true});
-    var jsFilter = $.filter(['**/*.js'],{restore:true});
+    //var jsFilter = $.filter(['**/*.js'],{restore:true});
+    var jsAppFilter = $.filter(['**/app.js'],{restore:true});
+    var jsLibFilter = $.filter(['**/lib.js'],{restore:true});
+    var indexHtmlFilter = $.filter(['**/*', '!**/index.html'], { restore: true });
+
 
     return gulp
         .src(config.index)
         .pipe($.plumber())
-        .pipe($.inject(
+        .pipe($.inject(   
             gulp.src(templateCache, {read: false}), {
                 starttag: '<!-- inject:templates:js -->'
-            }))
-        .pipe(assets)
+            }))  //inject does the bundling up of css and js files based on comments in index.html
+        .pipe(assets) //useref - go through index.html and bundle up css and js based on comments
         .pipe(cssFilter)
-        .pipe($.csso())
+        .pipe($.csso())  //minify CSS
         .pipe(cssFilter.restore)
-        .pipe(jsFilter)
-        .pipe($.uglify())
-        .pipe(jsFilter.restore)
+        .pipe(jsLibFilter)
+        .pipe($.uglify()) //minify lib javascript
+        .pipe(jsLibFilter.restore)
+        .pipe(jsAppFilter)
+        .pipe($.ngAnnotate())
+        .pipe($.uglify())  //minify app javascript
+        .pipe(jsAppFilter.restore)
+        .pipe(indexHtmlFilter)
+        .pipe($.rev())  //add revision numbers to all files in the pipe, except index.html
+        .pipe(indexHtmlFilter.restore)
+        .pipe($.revReplace())  //substitute any references to files with the revision-named one
+        .pipe(gulp.dest(config.build))
+        .pipe($.rev.manifest())
         .pipe(gulp.dest(config.build));
+});
+
+gulp.task('bump', function() {
+    var msg = 'Bumping versions';
+    var type = args.type;
+    var version = args.version;
+    var options = {};
+    if (version) {
+        options.version = version;
+        msg += ' to ' + version;
+    } else {
+        options.type = type;
+        msg += ' for a ' + type;
+    }
+    log(msg);
+
+    return gulp
+        .src(config.packages)
+        .pipe($.print())
+        .pipe($.bump(options))
+        .pipe(gulp.dest(config.root));
 });
 
 gulp.task('build', ['optimize', 'images', 'fonts'], function() {

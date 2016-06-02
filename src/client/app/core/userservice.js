@@ -31,10 +31,10 @@
             var apiURL = 'http://localhost:33116';
 
             return $http.post(apiURL + '/api/account/register', userInfo, config)
-                .then(registerUserComplete)
+                .then(registerUserSuccess)
                 .catch(registerUserError);
             
-            function registerUserComplete(data, status, headers, config) {
+            function registerUserSuccess(data, status, headers, config) {
                 logger.debug("Successfully called register");
             }
 

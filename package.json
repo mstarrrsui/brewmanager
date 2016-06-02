@@ -1,6 +1,6 @@
 {
   "name": "brewmanager",
-  "version": "0.1.0",
+  "version": "0.10.0",
   "description": "Brewmanager app",
   "authors": [
     "Mike Starr"
@@ -27,6 +27,7 @@
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^1.8.0",
+    "gulp-bump": "^2.1.0",
     "gulp-csso": "^2.0.0",
     "gulp-filter": "^4.0.0",
     "gulp-htmlmin": "^2.0.0",
@@ -36,9 +37,12 @@
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
     "gulp-load-plugins": "^1.2.0",
+    "gulp-ng-annotate": "^2.0.0",
     "gulp-nodemon": "^2.0.6",
     "gulp-plumber": "^1.1.0",
     "gulp-print": "^2.0.1",
+    "gulp-rev": "^7.0.0",
+    "gulp-rev-replace": "^0.4.3",
     "gulp-task-listing": "^1.0.1",
     "gulp-uglify": "^1.5.3",
     "gulp-useref": "^3.1.0",
