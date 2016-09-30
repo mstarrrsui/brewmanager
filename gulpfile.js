@@ -38,27 +38,32 @@ gulp.task('templatecache', ['clean-code'], function() {
 });
 
 gulp.task('wiredep', function () {
-    log('Wire up the bower css js and our app js into the html');
+    log('Wire up the libs css js and our app js into the html');
     var options = config.getWiredepDefaultOptions();
     var wiredep = require('wiredep').stream;
 
     return gulp
         .src(config.index)
-        .pipe(wiredep(options)) //bower stuff
+        //.pipe(wiredep(options)) //libs stuff
         .pipe($.inject(gulp.src(config.js))) //app stuff
         .pipe(gulp.dest(config.client));
 });
 
 //
-// inject deals with CSS, but calls wiredep for JS injection
+// inject CSS and JS for the app code
 //
-gulp.task('inject', ['wiredep', 'templatecache'], function () {
-    log('Wire up the app css into the html, and call wiredep ');
+gulp.task('inject', ['templatecache'], function () {
+
+
+    log('Wire up the app and lib js and css into the html');
 
     return gulp
         .src(config.index)
+        //.pipe($.inject(gulp.src('./libs/css/**/*.css')))
+        //.pipe($.inject(gulp.src('./libs/js/**/*.js', {read: false}), {name: 'libs'}))
         .pipe($.inject(gulp.src(config.theme)))
         .pipe($.inject(gulp.src(config.css)))
+        .pipe($.inject(gulp.src(config.js)))
         .pipe(gulp.dest(config.client));
 });
 

@@ -7,7 +7,7 @@ module.exports = function () {
     var server = './src/server/';
     var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
-    var wiredep = require('wiredep');
+   //var wiredep = require('wiredep');
     //var bowerFiles = wiredep({devDependencies: true})['js'];
 
     var config = {
@@ -23,7 +23,7 @@ module.exports = function () {
         theme: clientStyle + 'bootstrap-flatly.css',
         css: temp + 'styles.css',
         fonts: [
-            './bower_components/font-awesome/fonts/**/*.*',
+            './libs/font-awesome/fonts/**/*.*',
             client + 'fonts/**/*.*'
         ],
         html: clientApp + '**/*.html',
@@ -66,17 +66,9 @@ module.exports = function () {
          */
         browserReloadDelay: 1000,
 
-        /**
-         * Bower and NPM locations
-         */
-        bower: {
-            json: require('./bower.json'),
-            directory: './bower_components/',
-            ignorePath: '../..'
-        },
+
         packages: [
-            './package.json',
-            './bower.json'
+            './package.json'
         ],
 
         /**
