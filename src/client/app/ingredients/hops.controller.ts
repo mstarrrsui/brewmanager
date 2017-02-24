@@ -1,11 +1,13 @@
-(function () {
+(function() {
     'use strict';
+
     angular
         .module('app.ingredients')
-        .controller('YeastController', YeastController);
-    YeastController.$inject = ['$scope', '$http', 'dataservice', 'logger', 'hopsFilter'];
+        .controller('HopsController', HopsController);
+
+    HopsController.$inject = ['$scope','$http', 'dataservice', 'logger', 'hopsFilter'];
     /* @ngInject */
-    function YeastController($scope, $http, dataservice, logger, hopsFilter) {
+    function HopsController($scope:any, $http:any, dataservice:any, logger:any, hopsFilter:any) {
         var vm = this;
         vm.filterString = '';
         vm.filteredData = [];
@@ -22,61 +24,78 @@
             filterstring: vm.filterString,
             totalpages: vm.totalPages
         };
+
         activate();
+
         $scope.$watch(function () {
             return vm.filterString;
-        }, function (value) {
+        },function(value:any){
             console.log('filter:' + value);
             setCurrPageData(1);
         });
+
+
         function activate() {
-            return getHops().then(function () {
+            return getHops().then(function() {
                 setCurrPageData(1);
                 logger.info('Activated Hops View');
             });
         }
-        function setCurrPageData(page) {
+
+        function setCurrPageData(page:number) {
+
             filterData();
             determineCurrPage(page);
+
         }
-        function determineCurrPage(page) {
-            if (page > vm.totalPages) {
+
+        function determineCurrPage(page:number){
+            if (page > vm.totalPages)  {
                 vm.currPage = vm.totalPages;
                 return;
-            }
-            else if (page < 1) {
+            } else if (page < 1) {
                 vm.currPage = 1;
                 return;
-            }
-            else {
+            } else {
                 vm.currPage = page;
             }
-            vm.currPageData = _.slice(vm.filteredData, ((vm.currPage - 1) * vm.pageSize), (vm.currPage * vm.pageSize));
+
+            vm.currPageData = _.slice(vm.filteredData,
+                ((vm.currPage - 1) * vm.pageSize),
+                (vm.currPage * vm.pageSize));
         }
+
+
         function prevPage() {
             setCurrPageData(vm.currPage - 1);
         }
+
         function nextPage() {
             setCurrPageData(vm.currPage + 1);
         }
+
         function filterData() {
             vm.filteredData = vm.data;
             if (vm.filterString !== '') {
-                vm.filteredData = _.filter(vm.filteredData, function (o) {
+                vm.filteredData = _.filter(vm.filteredData, function(o:any) {
                     return o.name.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1 ||
-                        o.description.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1;
+                        o.description.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1
                 });
             }
             vm.totalPages = Math.ceil(vm.filteredData.length / vm.pageSize);
         }
+
+
+
         function getHops() {
-            return dataservice.getHops().then(function (data) {
+            return dataservice.getHops().then(function (data:any) {
                 vm.data = data;
             });
         }
-        function clickMe(hopsName) {
+
+        function clickMe(hopsName:string) {
             logger.info('Clicked on ' + hopsName + '!!!');
         }
     }
 })();
-//# sourceMappingURL=yeast.controller.js.map
+

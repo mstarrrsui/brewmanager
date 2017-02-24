@@ -1,11 +1,13 @@
-(function () {
+(function() {
     'use strict';
+
     angular
         .module('app.account')
         .controller('RegisterController', RegisterController);
-    RegisterController.$inject = ['$scope', '$http', 'userservice', 'logger'];
+
+    RegisterController.$inject = ['$scope','$http', 'userservice', 'logger'];
     /* @ngInject */
-    function RegisterController($scope, $http, userservice, logger) {
+    function RegisterController($scope:any, $http:any, userservice:any, logger:any) {
         var vm = this;
         vm.submitRegister = submitRegister;
         vm.regemail = null;
@@ -14,8 +16,13 @@
         vm.lastname = null;
         vm.firstname = null;
         vm.errorMessages = null;
+
+
+
         function submitRegister() {
+
             vm.errorMessages = null;
+            
             var userinfo = {
                 Email: vm.regemail,
                 Password: vm.regpwd,
@@ -24,12 +31,14 @@
                 LastName: vm.lastname
             };
             return userservice.registerUser(userinfo)
-                .catch(function (e) {
-                //logger.error('An error occurred');
-                //todo - populate viewmodel objects with errors
-                vm.errorMessages = angular.copy(e.data.Errors);
-            });
+                .catch(function(e:any) {
+                    //logger.error('An error occurred');
+
+                    //todo - populate viewmodel objects with errors
+                    vm.errorMessages = angular.copy(e.data.Errors);
+
+                });
         }
     }
 })();
-//# sourceMappingURL=register.controller.js.map
+

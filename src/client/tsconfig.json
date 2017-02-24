@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "target": "ES5",
+    "sourceMap": true,
+    "listFiles": false
+    //"outFile": "mikeoutput.ts"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

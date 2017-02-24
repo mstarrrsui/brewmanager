@@ -1,10 +1,8 @@
-(function() {
+(function () {
     'use strict';
-
     angular
         .module('blocks.exception')
         .factory('exception', exception);
-
     exception.$inject = ['logger'];
     /* @ngInject */
     function exception(logger) {
@@ -12,11 +10,11 @@
             catcher: catcher
         };
         return service;
-
         function catcher(message) {
-            return function(reason) {
+            return function (reason) {
                 logger.error(message, reason);
             };
         }
     }
 })();
+//# sourceMappingURL=exception.js.map
