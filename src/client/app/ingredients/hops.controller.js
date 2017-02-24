@@ -1,82 +1,85 @@
-(function () {
+var brewapp;
+(function (brewapp) {
     'use strict';
-    angular
-        .module('app.ingredients')
-        .controller('HopsController', HopsController);
-    HopsController.$inject = ['$scope', '$http', 'dataservice', 'logger', 'hopsFilter'];
-    /* @ngInject */
-    function HopsController($scope, $http, dataservice, logger, hopsFilter) {
-        var vm = this;
-        vm.filterString = '';
-        vm.filteredData = [];
-        vm.data = [];
-        vm.currPageData = [];
-        vm.title = 'Hops';
-        vm.currPage = 1;
-        vm.pageSize = 20;
-        vm.totalPages = -1;
-        vm.clickMe = clickMe;
-        vm.nextPage = nextPage;
-        vm.prevPage = prevPage;
-        vm.debugdata = {
-            filterstring: vm.filterString,
-            totalpages: vm.totalPages
-        };
-        activate();
-        $scope.$watch(function () {
-            return vm.filterString;
-        }, function (value) {
-            console.log('filter:' + value);
-            setCurrPageData(1);
-        });
-        function activate() {
-            return getHops().then(function () {
-                setCurrPageData(1);
-                logger.info('Activated Hops View');
+    var HopsController = (function () {
+        // @ngInject
+        function HopsController($scope, $http, dataservice, logger, hopsFilter) {
+            this.filterString = '';
+            this.filteredData = [];
+            this.data = [];
+            this.currPageData = [];
+            this.title = 'Hops';
+            this.currPage = 1;
+            this.pageSize = 20;
+            this.totalPages = -1;
+            this.dataservice = dataservice;
+            this.logger = logger;
+            this.hopsFilter = hopsFilter;
+            this.http = $http;
+            $scope.$watch(function () {
+                return this.filterString;
+            }, function (value) {
+                console.log('filter:' + value);
+                this.setCurrPageData(1);
             });
+            this.activate();
         }
-        function setCurrPageData(page) {
-            filterData();
-            determineCurrPage(page);
-        }
-        function determineCurrPage(page) {
-            if (page > vm.totalPages) {
-                vm.currPage = vm.totalPages;
+        HopsController.prototype.activate = function () {
+            var _this = this;
+            return this.getHops().then(function () {
+                _this.setCurrPageData(1);
+                _this.logger.info('Activated Hops View');
+            });
+            // this.filterString = "blah";
+        };
+        HopsController.prototype.setCurrPageData = function (page) {
+            this.filterData();
+            this.determineCurrPage(page);
+        };
+        HopsController.prototype.determineCurrPage = function (page) {
+            if (page > this.totalPages) {
+                this.currPage = this.totalPages;
                 return;
             }
             else if (page < 1) {
-                vm.currPage = 1;
+                this.currPage = 1;
                 return;
             }
             else {
-                vm.currPage = page;
+                this.currPage = page;
             }
-            vm.currPageData = _.slice(vm.filteredData, ((vm.currPage - 1) * vm.pageSize), (vm.currPage * vm.pageSize));
-        }
-        function prevPage() {
-            setCurrPageData(vm.currPage - 1);
-        }
-        function nextPage() {
-            setCurrPageData(vm.currPage + 1);
-        }
-        function filterData() {
-            vm.filteredData = vm.data;
-            if (vm.filterString !== '') {
-                vm.filteredData = _.filter(vm.filteredData, function (o) {
-                    return o.name.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1 ||
-                        o.description.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1;
+            this.currPageData = _.slice(this.filteredData, ((this.currPage - 1) * this.pageSize), (this.currPage * this.pageSize));
+        };
+        HopsController.prototype.prevPage = function () {
+            this.setCurrPageData(this.currPage - 1);
+        };
+        HopsController.prototype.nextPage = function () {
+            this.setCurrPageData(this.currPage + 1);
+        };
+        HopsController.prototype.filterData = function () {
+            this.filteredData = this.data;
+            if (this.filterString !== '') {
+                this.filteredData = _.filter(this.filteredData, function (o) {
+                    return o.name.toLowerCase().indexOf(this.filterString.toLowerCase()) !== -1 ||
+                        o.description.toLowerCase().indexOf(this.filterString.toLowerCase()) !== -1;
                 });
             }
-            vm.totalPages = Math.ceil(vm.filteredData.length / vm.pageSize);
-        }
-        function getHops() {
-            return dataservice.getHops().then(function (data) {
-                vm.data = data;
+            this.totalPages = Math.ceil(this.filteredData.length / this.pageSize);
+        };
+        HopsController.prototype.getHops = function () {
+            return this.dataservice.getHops().then(function (data) {
+                this.data = data;
             });
-        }
-        function clickMe(hopsName) {
-            logger.info('Clicked on ' + hopsName + '!!!');
-        }
-    }
-})();
+        };
+        HopsController.prototype.clickMe = function (hopsName) {
+            this.logger.info('Clicked on ' + hopsName + '!!!');
+        };
+        return HopsController;
+    }());
+    // HopsController.$inject = ['$scope', '$http', 'dataservice', 'logger', 'hopsFilter'];
+    HopsController.$inject = ['$scope', '$http', 'dataservice', 'logger', 'hopsFilter'];
+    angular
+        .module('app.ingredients')
+        .controller('HopsController', HopsController);
+})(brewapp || (brewapp = {}));
 //# sourceMappingURL=hops.controller.js.map

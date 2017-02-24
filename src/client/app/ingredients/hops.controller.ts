@@ -1,101 +1,111 @@
-(function() {
+
+namespace brewapp {
     'use strict';
+
+
+    class HopsController  {
+
+        public filterString: string = '';
+        public filteredData: Array<any> = [];
+        public data: Array<any> = [];
+        public currPageData: Array<any> = [];
+        public title: string = 'Hops';
+        public currPage: number = 1;
+        public pageSize: number = 20;
+        public totalPages: number = -1;
+
+        private dataservice: any;
+        private logger: any;
+        private hopsFilter: any;
+        private http: angular.IHttpService;
+
+        // HopsController.$inject = ['$scope', '$http', 'dataservice', 'logger', 'hopsFilter'];
+
+        static $inject: Array<string> = ['$scope', '$http', 'dataservice', 'logger', 'hopsFilter'];
+
+        // @ngInject
+        constructor($scope: ng.IScope, $http: angular.IHttpService, dataservice: any, logger: any, hopsFilter: any) {
+            this.dataservice = dataservice;
+            this.logger = logger;
+            this.hopsFilter = hopsFilter;
+
+            this.http = $http;
+
+            $scope.$watch(function() {
+                return this.filterString;
+            }, function(value: any) {
+                console.log('filter:' + value);
+                this.setCurrPageData(1);
+            });
+
+            this.activate();
+        }
+
+        private activate(): angular.IPromise<any> {
+            return this.getHops().then(() => {
+                this.setCurrPageData(1);
+                this.logger.info('Activated Hops View');
+            });
+
+            // this.filterString = "blah";
+        }
+
+        public setCurrPageData(page: number): void {
+            this.filterData();
+            this.determineCurrPage(page);
+        }
+
+        private determineCurrPage(page: number): void {
+            if (page > this.totalPages) {
+                this.currPage = this.totalPages;
+                return;
+            } else if (page < 1) {
+                this.currPage = 1;
+                return;
+            } else {
+                this.currPage = page;
+            }
+
+            this.currPageData = _.slice(this.filteredData,
+                ((this.currPage - 1) * this.pageSize),
+                (this.currPage * this.pageSize));
+        }
+
+
+        public prevPage(): void {
+            this.setCurrPageData(this.currPage - 1);
+        }
+
+        public nextPage(): void {
+            this.setCurrPageData(this.currPage + 1);
+        }
+
+        public filterData(): void {
+            this.filteredData = this.data;
+            if (this.filterString !== '') {
+                this.filteredData = _.filter(this.filteredData, function (o: any) {
+                    return o.name.toLowerCase().indexOf(this.filterString.toLowerCase()) !== -1 ||
+                        o.description.toLowerCase().indexOf(this.filterString.toLowerCase()) !== -1
+                });
+            }
+            this.totalPages = Math.ceil(this.filteredData.length / this.pageSize);
+        }
+
+        public getHops(): angular.IPromise<any> {
+            return this.dataservice.getHops().then( function(data: any) {
+                this.data = data;
+            });
+        }
+
+        public clickMe(hopsName: string): void {
+            this.logger.info('Clicked on ' + hopsName + '!!!');
+        }
+
+    }
 
     angular
         .module('app.ingredients')
         .controller('HopsController', HopsController);
 
-    HopsController.$inject = ['$scope','$http', 'dataservice', 'logger', 'hopsFilter'];
-    /* @ngInject */
-    function HopsController($scope:any, $http:any, dataservice:any, logger:any, hopsFilter:any) {
-        var vm = this;
-        vm.filterString = '';
-        vm.filteredData = [];
-        vm.data = [];
-        vm.currPageData = [];
-        vm.title = 'Hops';
-        vm.currPage = 1;
-        vm.pageSize = 20;
-        vm.totalPages = -1;
-        vm.clickMe = clickMe;
-        vm.nextPage = nextPage;
-        vm.prevPage = prevPage;
-        vm.debugdata = {
-            filterstring: vm.filterString,
-            totalpages: vm.totalPages
-        };
-
-        activate();
-
-        $scope.$watch(function () {
-            return vm.filterString;
-        },function(value:any){
-            console.log('filter:' + value);
-            setCurrPageData(1);
-        });
-
-
-        function activate() {
-            return getHops().then(function() {
-                setCurrPageData(1);
-                logger.info('Activated Hops View');
-            });
-        }
-
-        function setCurrPageData(page:number) {
-
-            filterData();
-            determineCurrPage(page);
-
-        }
-
-        function determineCurrPage(page:number){
-            if (page > vm.totalPages)  {
-                vm.currPage = vm.totalPages;
-                return;
-            } else if (page < 1) {
-                vm.currPage = 1;
-                return;
-            } else {
-                vm.currPage = page;
-            }
-
-            vm.currPageData = _.slice(vm.filteredData,
-                ((vm.currPage - 1) * vm.pageSize),
-                (vm.currPage * vm.pageSize));
-        }
-
-
-        function prevPage() {
-            setCurrPageData(vm.currPage - 1);
-        }
-
-        function nextPage() {
-            setCurrPageData(vm.currPage + 1);
-        }
-
-        function filterData() {
-            vm.filteredData = vm.data;
-            if (vm.filterString !== '') {
-                vm.filteredData = _.filter(vm.filteredData, function(o:any) {
-                    return o.name.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1 ||
-                        o.description.toLowerCase().indexOf(vm.filterString.toLowerCase()) !== -1
-                });
-            }
-            vm.totalPages = Math.ceil(vm.filteredData.length / vm.pageSize);
-        }
-
-
-
-        function getHops() {
-            return dataservice.getHops().then(function (data:any) {
-                vm.data = data;
-            });
-        }
-
-        function clickMe(hopsName:string) {
-            logger.info('Clicked on ' + hopsName + '!!!');
-        }
-    }
-})();
+}
 

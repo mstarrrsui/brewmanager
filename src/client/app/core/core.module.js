@@ -7,7 +7,7 @@
             'ngAnimate',
             'ngSanitize',
             'ngRoute',
-            'ngStorage',
+            //'ngStorage',
             /* Cross-app modules */
             'blocks.exception',
             'blocks.logger',
