@@ -34,7 +34,7 @@
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
-        exceptionHandlerProvider.configure(config.appErrorPrefix);
+        //exceptionHandlerProvider.configure(config.appErrorPrefix);
         //configureStateHelper();
 
         /////////
