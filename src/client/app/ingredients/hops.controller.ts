@@ -31,9 +31,9 @@ namespace brewapp {
 
             this.http = $http;
 
-            $scope.$watch(function() {
+            $scope.$watch(() => {
                 return this.filterString;
-            }, function(value: any) {
+            }, (value: any) => {
                 console.log('filter:' + value);
                 this.setCurrPageData(1);
             });
@@ -42,7 +42,7 @@ namespace brewapp {
         }
 
         private activate(): angular.IPromise<any> {
-            return this.getHops().then(() => {
+            return this.getHops().then( () => {
                 this.setCurrPageData(1);
                 this.logger.info('Activated Hops View');
             });
@@ -92,7 +92,7 @@ namespace brewapp {
         }
 
         public getHops(): angular.IPromise<any> {
-            return this.dataservice.getHops().then( function(data: any) {
+            return this.dataservice.getHops().then( (data: any) => {
                 this.data = data;
             });
         }

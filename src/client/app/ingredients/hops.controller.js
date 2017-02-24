@@ -4,6 +4,7 @@ var brewapp;
     var HopsController = (function () {
         // @ngInject
         function HopsController($scope, $http, dataservice, logger, hopsFilter) {
+            var _this = this;
             this.filterString = '';
             this.filteredData = [];
             this.data = [];
@@ -17,10 +18,10 @@ var brewapp;
             this.hopsFilter = hopsFilter;
             this.http = $http;
             $scope.$watch(function () {
-                return this.filterString;
+                return _this.filterString;
             }, function (value) {
                 console.log('filter:' + value);
-                this.setCurrPageData(1);
+                _this.setCurrPageData(1);
             });
             this.activate();
         }
@@ -67,8 +68,9 @@ var brewapp;
             this.totalPages = Math.ceil(this.filteredData.length / this.pageSize);
         };
         HopsController.prototype.getHops = function () {
+            var _this = this;
             return this.dataservice.getHops().then(function (data) {
-                this.data = data;
+                _this.data = data;
             });
         };
         HopsController.prototype.clickMe = function (hopsName) {
